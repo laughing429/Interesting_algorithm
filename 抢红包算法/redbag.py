@@ -42,8 +42,21 @@ class cutLine(object):
         self.cut()
 
     def repeatHandle(self, cutPoint):
+        counter = Counter(cutPoint)
+        repeatPoint = filter(lambda x:x[1]>2, counter.items())
+        if repeatPoint:
+            for repeat in repeatPoint: # 获取第一个重复的值
+                repeatValue = repeat[0]
+                repeatNum = repeat[1] # 重复的值一共有几个
+                repeatIndex = cutPoint.index(repeatValue)
+                nextValue = cutPoint[repeatIndex+repeatNum]
+                subPoint = np.random.uniform(repeatValue, nextValue, repeatNum -1)
+                cutPoint.extend(subPoint)
+            newcutPoint = cutPoint.sort()
+            self.repeatHandle(newcutPoint)
+        else:
+            return cutPoint
 
-        pass
 
     def cut(self):
         testAll = []
@@ -53,7 +66,7 @@ class cutLine(object):
         cutPoint = cutPoint.tolist()
 
         # 检查是否有重复的情况
-
+        cutPoint = self.repeatHandle(cutPoint)
 
         cutPoint.insert(0, 0)
         cutPoint.insert(self.peopleNum, self.totalAmount)
@@ -65,5 +78,5 @@ class cutLine(object):
 
 if __name__ =='__main__':
     # doubleMean(1000, 10)
-    cutLine(1000, 10)
+    cutLine(1000, 200)
 
