@@ -65,7 +65,7 @@ class cutLine(object):
         cutPoint.sort()
         cutPoint = cutPoint.tolist()
 
-        # 检查是否有重复的情况
+        # 处理是否有重复的情况
         cutPoint = self.repeatHandle(cutPoint)
 
         cutPoint.insert(0, 0)
