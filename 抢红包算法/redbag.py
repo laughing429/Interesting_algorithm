@@ -57,7 +57,6 @@ class cutLine(object):
         else:
             return cutPoint
 
-
     def cut(self):
         testAll = []
         cutPoint = np.random.uniform(0.01, self.totalAmount, self.peopleNum-1)
